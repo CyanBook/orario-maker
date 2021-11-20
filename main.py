@@ -75,15 +75,20 @@ async def fill(users: int, days: tuple, total_days: int, timetable: dict, combin
             # Verify that doesn't break requirements
             for day in range(0, total_days):
                 occupied = 0
+                not_occupied = 0
                 for user in range(0, users):
                     try:
                         user_occupied = new_timetable[user][day]
                     except KeyError:
                         pass
                     else:
-                        occupied += user_occupied
+                        print(user_occupied)
+                        if user_occupied == 0:
+                            not_occupied += 1
+                        else:
+                            user_occupied += 1
 
-                if occupied > days[0]:
+                if occupied > days[0] or not_occupied > days[1]:
                     break
 
             else:
